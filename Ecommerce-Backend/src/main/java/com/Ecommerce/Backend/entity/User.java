@@ -1,8 +1,8 @@
 package com.Ecommerce.Backend.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.Set;
 
@@ -10,6 +10,9 @@ import java.util.Set;
 @Table(name = "users")
 @AllArgsConstructor
 @NoArgsConstructor
+@Getter
+@Setter
+@Builder
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,8 +21,10 @@ public class User {
     @Column(nullable = false,unique = true)
     private String email;
 
+    @JsonIgnore
     @Column(nullable = false)
-    private String address;
+    private String password;
+
 
     private String name;
 

@@ -14,7 +14,7 @@ import java.util.Set;
 
 @Component
 public class JwtUtil {
-    private final String SECRET = "";
+    private final String SECRET = "supersecretkeysupersecretkeysupersecretkey";
     private final long EXPIRATION = 1000*60*60;
 
     private final Key key = Keys.hmacShaKeyFor(SECRET.getBytes());

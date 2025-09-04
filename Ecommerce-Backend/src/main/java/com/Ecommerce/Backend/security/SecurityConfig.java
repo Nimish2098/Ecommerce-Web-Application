@@ -2,9 +2,16 @@ package com.Ecommerce.Backend.security;
 
 import org.springframework.boot.autoconfigure.security.servlet.SecurityFilterAutoConfiguration;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.SecurityFilterChain;
 
+@Configuration
+@EnableWebSecurity
 public class SecurityConfig {
 
 
@@ -15,12 +22,11 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
-        http.csrf()
-                .disable()
+        http
+                .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth->
-                        auth.requestMatches("/api/auth/**").permitAll()
-                                .anyRequest().authenticated()
+                        auth.anyRequest().permitAll()
                 );
-        return http.build()
+        return http.build();
     }
 }
